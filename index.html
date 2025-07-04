@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SOMA Doc</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body theme="brightx">
+    <div class='full flex flex-column' style="padding-top: calc(45px + 2em);">
+        <nav class="box flex squared justify-between align-center gap fixed w100 top0 left0">
+            <h2><a class="primary">SOMADoc</a></h2>
+            <input class="box" id="search" placeholder="Search" style="width: 100%; max-width: 320px;">
+            <div class="flex align-center">
+                <select id="version" class="box">
+                    <option selected value="1">Version 1.x</option>
+                    <option value="0">Version 0.x</option>
+                </select>
+                <div>
+                    <p class="small text-center color-7">Theme</p>
+                    <label class="switch">
+                        <input type="checkbox" id="darkmode">
+                        <span class="slider box"></span>
+                    </label>
+                </div>
+                <label for="navCheckbox" id="navToggle">
+                    <input type="checkbox" id="navCheckbox"/>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+            </div>
+        </nav>
+        <div class='full pad2 doc'>
+            <div class="nav">
+                <ul class="nopad">
+                    <li>
+                        <input type="checkbox" id="Prologue" checked>
+                        <label for="Prologue">Prologue</label>
+                        <ul>
+                            <li><a class="active">Introduction</a></li>
+                            <li><a>Release Note</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="Getting-Started">
+                        <label for="Getting-Started">Getting Started</label>
+                        <ul>
+                            <li><a>Installation</a></li>
+                            <li><a>Configuration</a></li>
+                            <li><a>Structure</a></li>
+                            <li><a>Frontend</a></li>
+                            <li><a>Deployment</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="Architecture">
+                        <label for="Architecture">Architecture</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="Basics">
+                        <label for="Basics">The Basics</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="Digging-Deeper">
+                        <label for="Digging-Deeper">Digging Deeper</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="Security">
+                        <label for="Security">Security</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="Database">
+                        <label for="Database">Database</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="Testing">
+                        <label for="Testing">Testing</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="Packages">
+                        <label for="Packages">Packages</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="API">
+                        <label for="API">API</label>
+                    </li>
+                </ul>
+            </div>
+            <div class="content">
+                <md># 🌟 SOMADoc
+
+**SOMADoc** is a lightweight CSS & JS framework designed to build **beautiful, responsive, and easy-to-maintain documentation websites** in seconds. Whether you're documenting an app, a library, or a product, SOMA gives you a ready-to-use structure and features out of the box.
+
+
+---
+
+## 🎯 Why SOMADoc ?
+
+- ⚡ **Fast to set up**: Drop in the files and you're ready to go.
+- 🎨 **Customizable**: Built with SCSS for easy theming and layout changes.
+- 📱 **Responsive**: Looks great on mobile, tablet, and desktop.
+- 🌙 **Light/Dark Mode**: One toggle to switch themes dynamically.
+- 🧭 **Auto Page Navigation**: Auto-generates a table of contents from headings.
+- 🔍 **Search-ready**: Includes a search input (hook up your logic).
+- 🧩 **Modular structure**: Split your content by sections and easily navigate through them.
+
+---
+
+## 🛠️ How It Works
+
+### 🧪 1. Include the Assets
+
+CSS & JS
+
+> `marked.js` is used to render Markdown directly in your HTML via `<md>` tags.
+
+---
+
+### 📦 2. Structure Your HTML
+
+```html
+<md>
+# Welcome to SOMA Docs
+
+## Installation
+Steps to install...
+
+## Usage
+How to use...
+
+</md>
+```
+
+> All your Markdown content goes inside the `<md>` tag. The framework will automatically render it and generate in-page navigation.
+
+---
+
+### 🌓 3. Theme Toggle
+
+SOMA comes with a **dark mode switch** out of the box. Users can toggle between light and dark themes effortlessly.
+
+```html
+<label class="switch">
+    <input type="checkbox" id="darkmode">
+    <span class="slider"></span>
+</label>
+```
+
+---
+
+## ✨ Notable Features
+
+### 🧭 Auto-generated Page Nav
+
+A dynamic sidebar is generated from your `<h2>` and `<h3>` titles, making navigation clear and efficient — especially for long docs.
+
+### 📱 Mobile Navigation Drawer
+
+A hamburger menu toggle (`#navToggle`) enables clean navigation on small screens. It slides in the sidebar and locks the page scroll when open.
+
+### 🌀 zLoad Loader
+
+SOMA comes bundled with an ultra-simple loading spinner utility:
+
+```js
+zLoad(
+    state = true,        // Show or hide
+    color = '#68b8fd',   // Spinner color
+    scale = 1,           // Size multiplier
+    opacity = 0.5        // Background opacity
+);
+```
+
+> Demo available [here](https://delord-c.github.io/zLoad/)
+
+---
+
+## 📚 Ideal For
+
+- Developer documentation
+- API manuals
+- Product onboarding
+- Internal tools and README pages
+
+---
+
+## 🔗 Live Demo
+
+> You can see a live example [here](https://codepen.io/Zulgard/pen/OPVexYJ)
+
+---
+
+## 📥 Get Started Now
+
+1. Download the `style.css` and `script.js` files.
+2. Create your HTML with the `<md>` tag.
+3. Customize with your content and enjoy 🎉
+
+---
+
+Feel free to tell me if you want a version of this presentation embedded directly in your project as a Markdown page, or exported as a README for GitHub.</md>
+            </div>
+            
+        </div>
+        <footer class="box squared">
+            <p class="text-center">© 2025 SOMA</p>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/lib/marked.umd.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
