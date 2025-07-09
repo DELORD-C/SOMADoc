@@ -33,6 +33,10 @@ body[theme="bright"] {
     --primary: #{darken($primary, 15%)};
     --brightness: 1.1;
     --code: rgba(0, 0, 0, 0.06);
+
+    #loading > img {
+        filter: brightness(85%);
+    }
 }
 
 * {
@@ -406,6 +410,12 @@ a {
 
     .nav {
         max-width: 220px;
+        position: relative;
+
+        > ul {
+            position: sticky;
+            top: 123px;
+        }
 
         input {
             display: none;
@@ -481,6 +491,10 @@ a {
     }
 
     md {
+        hr {
+            border-color: var(--bg-4);
+        }
+
         li {
             list-style: circle;
         }
@@ -655,6 +669,62 @@ a {
     }
 }
 
+#flashes {
+    position: fixed;
+    z-index: 15;
+    top: 10px;
+    right: -300px;
+
+    > div {
+        max-width: 300px;
+        border-color: var(--primary);
+
+        &.error {
+            border-color: red;
+        }
+    }
+}
+
+#search {
+    position: relative;
+
+    #suggestions {
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        width: 100%;
+        padding: 10px 0;
+        top: 40px;
+
+        li {
+            padding: 0 10px;
+        }
+
+        li:hover {
+            background-color: var(--bg-4);
+        }
+
+        a {
+            display: grid;
+            grid-template-columns: 1fr 100px;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px;
+
+            > p {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+    }
+}
+
+#loading {
+    z-index: 99999;
+    user-select: none;
+}
+
 @media (max-width: 1050px) {
     .doc {
         .content {
@@ -732,7 +802,7 @@ a {
             background-color: var(--bg-4);
             z-index: 2;
             max-width: none;
-            padding: 100px 30px;
+            padding: 180px 30px 30px 30px;
 
             > ul {
                 height: 100%;
@@ -740,16 +810,30 @@ a {
             }
         }
     }
-}
 
-@media (max-width: 600px) {
-    #search {
-        display: none;
+    nav {
+        flex-wrap: wrap;
+        > div {
+            width: 100%;
+            justify-content: space-between;
+        }
+    }
+
+    body > div {
+        padding-top: calc(90px + 4em)!important;
     }
 }
 
-@media (max-width: 450px) {
-    #version {
+@media (max-width: 555px) {
+    html {
+        font-size: 0.9em;
+    }
+
+    #search {
+        max-width: none!important;
+    }
+
+    nav > div:last-child {
         display: none;
     }
 }

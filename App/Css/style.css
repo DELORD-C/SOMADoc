@@ -28,6 +28,9 @@ body[theme=bright] {
   --brightness: 1.1;
   --code: rgba(0, 0, 0, 0.06);
 }
+body[theme=bright] #loading > img {
+  filter: brightness(85%);
+}
 
 * {
   transition: 0.3s;
@@ -401,6 +404,11 @@ a:hover {
 }
 .doc .nav {
   max-width: 220px;
+  position: relative;
+}
+.doc .nav > ul {
+  position: sticky;
+  top: 123px;
 }
 .doc .nav input {
   display: none;
@@ -457,6 +465,9 @@ a:hover {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 30px;
+}
+.doc md hr {
+  border-color: var(--bg-4);
 }
 .doc md li {
   list-style: circle;
@@ -599,6 +610,55 @@ a:hover {
   transform: rotate(-45deg) translate(-6px, 10px);
 }
 
+#flashes {
+  position: fixed;
+  z-index: 15;
+  top: 10px;
+  right: -300px;
+}
+#flashes > div {
+  max-width: 300px;
+  border-color: var(--primary);
+}
+#flashes > div.error {
+  border-color: red;
+}
+
+#search {
+  position: relative;
+}
+#search #suggestions {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  padding: 10px 0;
+  top: 40px;
+}
+#search #suggestions li {
+  padding: 0 10px;
+}
+#search #suggestions li:hover {
+  background-color: var(--bg-4);
+}
+#search #suggestions a {
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+}
+#search #suggestions a > p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#loading {
+  z-index: 99999;
+  user-select: none;
+}
+
 @media (max-width: 1050px) {
   .doc .content {
     display: flex;
@@ -661,20 +721,31 @@ a:hover {
     background-color: var(--bg-4);
     z-index: 2;
     max-width: none;
-    padding: 100px 30px;
+    padding: 180px 30px 30px 30px;
   }
   .doc > .nav > ul {
     height: 100%;
     overflow-y: scroll;
   }
-}
-@media (max-width: 600px) {
-  #search {
-    display: none;
+  nav {
+    flex-wrap: wrap;
+  }
+  nav > div {
+    width: 100%;
+    justify-content: space-between;
+  }
+  body > div {
+    padding-top: calc(90px + 4em) !important;
   }
 }
-@media (max-width: 450px) {
-  #version {
+@media (max-width: 555px) {
+  html {
+    font-size: 0.9em;
+  }
+  #search {
+    max-width: none !important;
+  }
+  nav > div:last-child {
     display: none;
   }
 }

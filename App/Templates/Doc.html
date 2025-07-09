@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{ app_name }} - {{ title }}</title>
+    <link rel="stylesheet" href="/App/Css/style.css">
+</head>
+
+<body theme="brightx">
+    {{ loading }}
+    {{ flashes }}
+    <div class='full flex flex-column' style="padding-top: calc(45px + 2em);">
+        <nav class="box flex squared justify-between align-center gap fixed w100 top0 left0">
+            <label for="navCheckbox" id="navToggle">
+                <input type="checkbox" id="navCheckbox"/>
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <h2><a class="primary" href="/">{{ app_name }}</a></h2>
+            <div id="search" style="width: 100%; max-width: 320px;">
+                <input class="box" autocomplete="off" placeholder="Search" style="width: 100%;">
+                <ul id="suggestions" class="box">
+                    <li><a href="#"><p>🌟 SOMADoc</p><p class="small">Prologue/Introduction</p></a></li>
+                    <li><a href="#"><p>🎯 Why SOMADoc ?</p><p class="small">Prologue/Introduction</p></a></li>
+                </ul>
+            </div>
+            <div class="flex align-center">
+                {{ versions }}
+                <div>
+                    <p class="small text-center color-7">Theme</p>
+                    <label class="switch">
+                        <input type="checkbox" id="darkmode">
+                        <span class="slider box"></span>
+                    </label>
+                </div>
+            </div>
+        </nav>
+        <div class='full pad2 doc'>
+            <div class="nav">
+                <ul class="nopad">
+                    {{ nav }}
+                </ul>
+            </div>
+            <div class="content">
+                <md>{{ md }}</md>
+            </div>
+            
+        </div>
+        <footer class="box squared">
+            <p class="text-center color-7 small">Powered by SOMADoc | © 2025 SOMADoc</p>
+        </footer>
+    </div>
+    <script src="/App/Js/marked.js"></script>
+    <script>
+        let data = `{{ data }}`;
+    </script>
+    <script src="/App/Js/script.js"></script>
+</body>
+</html>

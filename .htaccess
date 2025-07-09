@@ -1,0 +1,10 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_URI} !^/App/Css/
+RewriteCond %{REQUEST_URI} !^/App/Js/
+RewriteCond %{REQUEST_URI} !^/Assets/
+RewriteCond %{REQUEST_URI} !^/index\.php$
+RewriteRule ^.*$ /index.php [L]
+
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/index\.php[\s?]
+RewriteRule ^index\.php$ / [R=301,L]
