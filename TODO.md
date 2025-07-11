@@ -1,3 +1,0 @@
-- Locale Handle
-- Real Doc for SOMADoc
-- Search Upgrade (add contents)

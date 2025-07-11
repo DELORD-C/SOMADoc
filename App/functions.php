@@ -100,21 +100,15 @@ function getRequestParams(): array
     return explode('/', trim(urldecode($_SERVER['REQUEST_URI']), '/'));
 }
 
-#[NoReturn] function redirectToHome(array $docs, bool $version = false, ?string $dVersion = null, ?string $dFolder = null): void
+#[NoReturn] function redirectToHome(array $docs): void
 {
-    if ($version) {
-        $dVersion = $dVersion ?? array_key_last($docs);
-        $dFolder = $dFolder ?? array_key_first($docs[$dVersion]);
-        if (! is_array($docs[$dVersion][$dFolder])) {
-            error('Folders depth in the Doc folder isn\'t deep enough, are you sure you want to use Versions ?');
-        }
-        $dFile = array_key_first($docs[$dVersion][$dFolder]);
-        $url = $dVersion.'/'.substr($dFolder, 5).'/'.substr($dFile, 5);
-    } else {
-        $dFolder = $dFolder ?? array_key_first($docs);
-        $dFile = array_key_first($docs[$dFolder]);
-        $url = substr($dFolder, 5).'/'.substr($dFile, 5);
+    $dVersion = $dVersion ?? array_key_last($docs);
+    $dFolder = $dFolder ?? array_key_first($docs[$dVersion]);
+    if (! is_array($docs[$dVersion][$dFolder])) {
+        error('Folders depth in the Doc folder isn\'t deep enough, are you sure you want to use Versions ?');
     }
+    $dFile = array_key_first($docs[$dVersion][$dFolder]);
+    $url = $dVersion.'/'.substr($dFolder, 5).'/'.substr($dFile, 5);
     header('Location: /'.$url);
     exit;
 }
@@ -136,7 +130,7 @@ function generateNav(array $docs, bool|string $version, string $activeFolder, st
             <ul>';
 
         foreach ($value as $file => $type) {
-            $html .= '<li><a class="'.($activeFile === $file ? 'active' : '').'" href="'.$base.substr($folder, 5).'/'.substr($file, 5).'">'.substr($file, 5).'</a></li>';
+            $html .= '<li><a class="'.($activeFile === substr($file, 5) ? 'active' : '').'" href="'.$base.substr($folder, 5).'/'.substr($file, 5).'">'.substr($file, 5).'</a></li>';
         }
 
         $html .= '</ul></li>';

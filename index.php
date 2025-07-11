@@ -10,44 +10,32 @@ if ($params[0] === 'darkmode') {
 }
 
 $docs = parseDoc();
-$version = env('VERSIONS') ?? false;
 
-if ($version) {
-    if ($params[0] === '') {
-        redirectToHome($docs, true);
-    }
-
-    if (! isset($docs[$params[0]])) {
-        flash("error", "Unknown version number.");
-        redirectToHome($docs, true);
-    }
-
-    $version = $params[0];
-    $folder = $params[1] ?? null;
-    $file = $params[2] ?? null;
-} else {
-    $folder = $params[0] ?? null;
-    $file = $params[1] ?? null;
+if ($params[0] === '') {
+    redirectToHome($docs);
 }
+
+if (! isset($docs[$params[0]])) {
+    flash("error", "Unknown version number.");
+    redirectToHome($docs);
+}
+
+$version = $params[0];
+$folder = $params[1] ?? null;
+$file = $params[2] ?? null;
 
 if (! $folder || ! $file) {
-    redirectToHome($docs, $version);
-}
-
-if ($version) {
-    $doc = $docs[$params[0]];
-} else {
-    $doc = $docs;
+    redirectToHome($docs);
 }
 
 $trueFolder = false;
 $trueFile = false;
 
-foreach ($doc as $tFolder => $content) {
+foreach ($docs[$version] as $tFolder => $content) {
     if (substr($tFolder, 5) === $folder) {
         $trueFolder = $tFolder;
     }
-    foreach ($doc[$tFolder] as $tFile => $contentFile) {
+    foreach ($docs[$version][$tFolder] as $tFile => $contentFile) {
         if (substr($tFile, 5) === $file) {
             $trueFile = $tFile;
             break;
@@ -55,16 +43,16 @@ foreach ($doc as $tFolder => $content) {
     }
 }
 
-if (! $trueFolder || ! $trueFile || ! isset($doc[$trueFolder][$trueFile])) {
+if (! $trueFolder || ! $trueFile || ! isset($docs[$version][$trueFolder][$trueFile])) {
     flash("error", "Page not found");
     redirectToHome($docs, $version);
 }
 
 render('Doc.html', $data = [
-    'nav' => generateNav($doc, $version, $folder, $file),
+    'nav' => generateNav($docs[$version], $version, $folder, $file),
     'md' => file_get_contents('Doc/'.trim($version.'/'.$trueFolder.'/'.$trueFile.'.md')),
     'versions' => generateVersionSelect($docs, $version),
-    'data' => generateDataForSearch($doc, $version),
+    'data' => generateDataForSearch($docs[$version], $version),
     'app_name' => env('APP_NAME') ?? 'SOMADoc',
     'title' => $folder.' - '.$file,
     'loading' => env('LOADING') ? getLoading() : '',
