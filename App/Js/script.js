@@ -87,16 +87,14 @@ if (md) {
 function updatePageNav () {
     let doc = document.documentElement;
     let top = doc.scrollTop;
+    let elems = document.querySelectorAll('.page-nav a[href^="#"]');
+    for (let link of elems) {
+        link.classList.remove('active');
+    }
     if (top === 0) {
-        for (let link of document.querySelectorAll('.page-nav a[href^="#"]')) {
-            link.classList.remove('active');
-        }
         document.querySelector('.page-nav > div > ul > li:first-child a').classList.add('active');
     } else if (top === doc.offsetHeight - window.innerHeight) {
-        for (let link of document.querySelectorAll('.page-nav a[href^="#"]')) {
-            link.classList.remove('active');
-        }
-        document.querySelector('.page-nav > div > ul > li:last-child a').classList.add('active');
+        elems[elems.length - 1].classList.add('active');
     } else {
         for (let heading of document.querySelectorAll('md h2, md h3')) {
             let rect = heading.getBoundingClientRect()
@@ -120,8 +118,6 @@ function updatePageNav () {
                                 behavior: "smooth"
                             });
                         }
-                    } else {
-                        link.classList.remove('active')
                     }
                 }
                 break;

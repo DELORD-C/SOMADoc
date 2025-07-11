@@ -109,11 +109,11 @@ function getRequestParams(): array
             error('Folders depth in the Doc folder isn\'t deep enough, are you sure you want to use Versions ?');
         }
         $dFile = array_key_first($docs[$dVersion][$dFolder]);
-        $url = $dVersion.'/'.substr($dFolder, 5).'/'.$dFile;
+        $url = $dVersion.'/'.substr($dFolder, 5).'/'.substr($dFile, 5);
     } else {
         $dFolder = $dFolder ?? array_key_first($docs);
         $dFile = array_key_first($docs[$dFolder]);
-        $url = substr($dFolder, 5).'/'.$dFile;
+        $url = substr($dFolder, 5).'/'.substr($dFile, 5);
     }
     header('Location: /'.$url);
     exit;
@@ -136,7 +136,7 @@ function generateNav(array $docs, bool|string $version, string $activeFolder, st
             <ul>';
 
         foreach ($value as $file => $type) {
-            $html .= '<li><a class="'.($activeFile === $file ? 'active' : '').'" href="'.$base.substr($folder, 5).'/'.$file.'">'.$file.'</a></li>';
+            $html .= '<li><a class="'.($activeFile === $file ? 'active' : '').'" href="'.$base.substr($folder, 5).'/'.substr($file, 5).'">'.substr($file, 5).'</a></li>';
         }
 
         $html .= '</ul></li>';
@@ -181,8 +181,8 @@ function generateDataForSearch(array $doc, false|string $version): string
                     $doc[$folder][$file][$line]['content'] = htmlspecialchars($value);
                     preg_match_all('/#/', $value, $hashtags);
                     $compl = preg_replace('/[^A-z0-9]/', '', $value);
-                    $doc[$folder][$file][$line]['link'] = $baseUrl.substr($folder, 5).'/'.$file.'#pagenav-'.count($hashtags[0]).'-'.$compl;
-                    $doc[$folder][$file][$line]['path'] = substr($folder, 5).'/'.$file;
+                    $doc[$folder][$file][$line]['link'] = $baseUrl.substr($folder, 5).'/'.substr($file, 5).'#pagenav-'.count($hashtags[0]).'-'.$compl;
+                    $doc[$folder][$file][$line]['path'] = substr($folder, 5).'/'.substr($file, 5);
                 }
             }
         }

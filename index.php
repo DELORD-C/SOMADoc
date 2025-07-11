@@ -41,22 +41,28 @@ if ($version) {
 }
 
 $trueFolder = false;
+$trueFile = false;
 
 foreach ($doc as $tFolder => $content) {
     if (substr($tFolder, 5) === $folder) {
         $trueFolder = $tFolder;
-        break;
+    }
+    foreach ($doc[$tFolder] as $tFile => $contentFile) {
+        if (substr($tFile, 5) === $file) {
+            $trueFile = $tFile;
+            break;
+        }
     }
 }
 
-if (! $trueFolder || ! isset($doc[$trueFolder][$file])) {
+if (! $trueFolder || ! $trueFile || ! isset($doc[$trueFolder][$trueFile])) {
     flash("error", "Page not found");
     redirectToHome($docs, $version);
 }
 
 render('Doc.html', $data = [
     'nav' => generateNav($doc, $version, $folder, $file),
-    'md' => file_get_contents('Doc/'.trim($version.'/'.$trueFolder.'/'.$file.'.md')),
+    'md' => file_get_contents('Doc/'.trim($version.'/'.$trueFolder.'/'.$trueFile.'.md')),
     'versions' => generateVersionSelect($docs, $version),
     'data' => generateDataForSearch($doc, $version),
     'app_name' => env('APP_NAME') ?? 'SOMADoc',
