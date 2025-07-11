@@ -7,6 +7,12 @@ It automatically turns your `.md` files into a full-featured, browsable document
 
 ---
 
+## 🕹️ Demo
+
+YOu can find a very short demo here : [https://codepen.io/Zulgard/full/OPVexYJ](https://codepen.io/Zulgard/full/OPVexYJ)
+
+---
+
 ## 🚀 Features
 
 - ✅ **Plug-and-play**: Just add your Markdown files — no configuration needed.
