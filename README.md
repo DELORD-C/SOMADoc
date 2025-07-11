@@ -5,6 +5,10 @@
 
 It automatically turns your `.md` files into a full-featured, browsable documentation site, without requiring a complex setup or build system.
 
+## 🕹️ Demo
+
+YOu can find a very short demo here : [https://codepen.io/Zulgard/full/OPVexYJ](https://codepen.io/Zulgard/full/OPVexYJ)
+
 ---
 
 ## 🚀 Features
