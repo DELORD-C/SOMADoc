@@ -698,10 +698,16 @@ a {
 
         li {
             padding: 0 10px;
+            border: 1px solid transparent;
+            border-radius: 10px;
+
+            &.active {
+                border-color: var(--primary);
+            }
         }
 
         li:hover {
-            background-color: var(--bg-4);
+            border-color: var(--main);
         }
 
         a {

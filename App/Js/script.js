@@ -2,9 +2,9 @@ let darkMode = document.getElementById('darkmode');
 if (darkMode) {
     darkMode.addEventListener('change', () => {
         if (darkMode.checked) {
-            document.body.setAttribute('theme', 'bright')
+            darkModeToggle(false)
         } else {
-            document.body.removeAttribute('theme')
+            darkModeToggle()
         }
     });
 }
@@ -13,7 +13,7 @@ let md = document.querySelector('md');
 if (md) {
     md.innerHTML = marked.parse(md.innerHTML.replace(/&gt;+/g, '>'), { sanitize: true });
 
-    let titles = document.querySelectorAll('md h2, md h3');
+    let titles = document.querySelectorAll('md h1, md h2, md h3');
 
     let h2Opened = false;
     let h2Title = '';
@@ -23,6 +23,10 @@ if (md) {
     let regex = /[^A-z0-9]/g
 
     for (let title of titles) {
+        if (title.tagName === 'H1') {
+            let h1Title = 'pagenav-1-' + title.innerHTML.replaceAll(regex,'');
+            title.setAttribute('id', h1Title)
+        }
         if (title.tagName === 'H2') {
             h2Title = 'pagenav-2-'+title.innerHTML.replaceAll(regex,'');
             title.setAttribute('id', h2Title)
@@ -169,12 +173,28 @@ if (data) {
     data = JSON.parse(data);
     let search = document.querySelector('#search > input');
     if (search) {
-        search.addEventListener('keyup', () => {
-            if (search.value.length > 2) {
-                getSuggestions(data, search.value);
-            } else {
-                hideSuggest(0)
+        search.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                validateSuggestion()
             }
+
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                selectNextSuggestion()
+            }
+
+            if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                selectPreviousSuggestion()
+            }
+
+            setTimeout(() => {
+                if (search.value.length > 2) {
+                    getSuggestions(data, search.value);
+                } else {
+                    hideSuggest(0)
+                }
+            }, 10)
         })
         search.addEventListener('focus', () => {
             if (search.value.length > 2) {
@@ -182,9 +202,6 @@ if (data) {
             } else {
                 hideSuggest(0)
             }
-        })
-        search.addEventListener('keydown', (e) => {
-            console.log(e)
         })
         document.addEventListener('click', (e) => {
             if( document.getElementById('suggestions') && e.target !== search && e.target !== document.getElementById('suggestions') && !document.getElementById('suggestions').contains(e.target)) {
@@ -194,6 +211,7 @@ if (data) {
     }
 }
 
+let suggestions = [];
 function getSuggestions(data, str) {
     let suggest = document.getElementById("suggestions");
 
@@ -209,17 +227,24 @@ function getSuggestions(data, str) {
             })
         })
 
-        let html = '';
-        if (results.length > 0) {
-            for (let result of results) {
-                html = html + `<li><a href="`+result.link+`"><p>`+result.content.replaceAll('#', '').trim()+`</p><p class="small">`+result.path+`</p></a></li>`;
+        if (results.toString() !== suggestions.toString()) {
+            suggestions = results.toString();
+            let html = '';
+            if (results.length > 0) {
+                for (let result of results) {
+                    html = html + `<li><a href="`+result.link+`"><p>`+result.content.replaceAll('#', '').trim()+`</p><p class="small">`+result.path+`</p></a></li>`;
+                }
+            } else {
+                html = '<li><p>...</p></li>'
             }
-        } else {
-            html = '<li><p>...</p></li>'
+            suggest.innerHTML = html;
+            suggest.style.opacity = '1';
+            suggest.style.pointerEvents = 'all';
+            let firstSuggest = document.querySelector('#suggestions > li:first-child');
+            if (firstSuggest) {
+                firstSuggest.classList.add('active');
+            }
         }
-        suggest.innerHTML = html;
-        suggest.style.opacity = '1';
-        suggest.style.pointerEvents = 'all';
     }
 }
 
@@ -229,8 +254,80 @@ function hideSuggest(duration = 300) {
         suggest.style.opacity = '0';
         suggest.style.pointerEvents = 'none';
         setTimeout(() => {
+            suggestions = [];
             suggest.innerHTML = '';
         }, duration)
+    }
+}
+
+function validateSuggestion() {
+    let suggest = document.querySelector("#suggestions > li.active > a");
+    if (suggest) {
+        hideSuggest()
+        suggest.focus();
+        suggest.click();
+    }
+}
+
+function selectNextSuggestion() {
+    let suggests = document.querySelectorAll("#suggestions > li");
+
+    if (suggests && suggests.length > 1) {
+        let active = document.querySelector("#suggestions > li.active");
+        if (active) {
+            active.classList.remove('active');
+            if (active.nextElementSibling != null) {
+                active.nextElementSibling.classList.add('active');
+            } else {
+                document.querySelector("#suggestions > li:first-child").classList.add('active');
+            }
+        }
+    }
+}
+
+function selectPreviousSuggestion() {
+    let suggests = document.querySelectorAll("#suggestions > li");
+
+    if (suggests && suggests.length > 1) {
+        let active = document.querySelector("#suggestions > li.active");
+        if (active) {
+            console.log(active);
+            active.classList.remove('active');
+            if (active.previousElementSibling != null) {
+                active.previousElementSibling.classList.add('active');
+            } else {
+                document.querySelector("#suggestions > li:last-child").classList.add('active');
+            }
+        }
+    }
+}
+
+function darkModeToggle (state = true) {
+    fetch('/darkmode/' + state);
+    if (state) {
+        document.body.removeAttribute('theme')
+        localStorage.setItem('darkMode', 'true')
+    } else {
+        document.body.setAttribute('theme', 'bright')
+        localStorage.setItem('darkMode', 'false')
+    }
+}
+
+if (localStorage.getItem("darkMode")) {
+    if (localStorage.getItem('darkMode') === 'true') {
+        darkMode.checked = false
+        darkModeToggle();
+    } else {
+        darkMode.checked = true
+        darkModeToggle(false);
+    }
+} else {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        darkMode.checked = false
+        darkModeToggle();
+    } else {
+        darkMode.checked = true
+        darkModeToggle(false);
     }
 }
 

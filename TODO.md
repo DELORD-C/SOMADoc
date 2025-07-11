@@ -1,5 +1,3 @@
-- DarkMode session
 - Locale Handle
-- favicon
-- nice scroll on load (link from suggests)
-- Ecrire une vraie doc
+- Real Doc for SOMADoc
+- Search Upgrade (add contents)

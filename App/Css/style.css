@@ -637,9 +637,14 @@ a:hover {
 }
 #search #suggestions li {
   padding: 0 10px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+}
+#search #suggestions li.active {
+  border-color: var(--primary);
 }
 #search #suggestions li:hover {
-  background-color: var(--bg-4);
+  border-color: var(--main);
 }
 #search #suggestions a {
   display: grid;

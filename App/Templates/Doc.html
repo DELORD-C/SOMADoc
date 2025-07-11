@@ -6,15 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{{ app_name }} - {{ title }}</title>
     <link rel="stylesheet" href="/App/Css/style.css">
+    <link rel="shortcut icon" href="/Assets/favicon.svg" type="image/x-icon">
 </head>
 
-<body theme="brightx">
+<body theme="{{ theme }}">
     {{ loading }}
     {{ flashes }}
     <div class='full flex flex-column' style="padding-top: calc(45px + 2em);">
         <nav class="box flex squared justify-between align-center gap fixed w100 top0 left0">
             <label for="navCheckbox" id="navToggle">
-                <input type="checkbox" id="navCheckbox"/>
+                <input type="checkbox" id="navCheckbox" {{ darkmode }}/>
                 <span></span>
                 <span></span>
                 <span></span>

@@ -147,7 +147,7 @@ function generateNav(array $docs, bool|string $version, string $activeFolder, st
 
 function generateVersionSelect(array $docs, false|string $version): string
 {
-    if (! $version) {
+    if (! $version || count($docs) === 1) {
         return '';
     }
 
@@ -196,4 +196,9 @@ function getLoading(): string
     return '<div id="loading" class="fixed full flex justify-center align-center bg-1">
         <img src="/Assets/loading.gif" alt="Loading">
     </div>';
+}
+
+function darkMode (bool $state): void
+{
+    $_SESSION['darkmode'] = $state ? '' : 'bright';
 }

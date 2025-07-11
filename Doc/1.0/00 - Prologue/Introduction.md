@@ -50,15 +50,6 @@ How to use...
 
 SOMA comes with a **dark mode switch** out of the box. Users can toggle between light and dark themes effortlessly.
 
-```html
-<label class="switch">
-    <input type="checkbox" id="darkmode">
-    <span class="slider"></span>
-</label>
-```
-
----
-
 ## ✨ Notable Features
 
 ### 🧭 Auto-generated Page Nav

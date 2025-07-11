@@ -2,10 +2,14 @@
 
 include('App/functions.php');
 
-$docs = parseDoc();
-
 $params = getRequestParams();
 
+if ($params[0] === 'darkmode') {
+    darkMode(! isset($params[1]) || $params[1] === 'true');
+    exit;
+}
+
+$docs = parseDoc();
 $version = env('VERSIONS') ?? false;
 
 if ($version) {
@@ -57,5 +61,7 @@ render('Doc.html', $data = [
     'data' => generateDataForSearch($doc, $version),
     'app_name' => env('APP_NAME') ?? 'SOMADoc',
     'title' => $folder.' - '.$file,
-    'loading' => env('LOADING') ? getLoading() : ''
+    'loading' => env('LOADING') ? getLoading() : '',
+    'theme' => $_SESSION['darkmode'] ?? '',
+    'darkmode' => ($_SESSION['darkmode'] ?? null) === 'bright' ? 'checked' : '',
 ]);
