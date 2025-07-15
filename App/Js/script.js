@@ -127,8 +127,9 @@ function updatePageNav () {
                         link.classList.remove('active');
                     }
                 }
+                
+                break;
             }
-            break;
         }
 
         if (! activated) {
