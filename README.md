@@ -42,6 +42,7 @@ SOMADoc/
 ├── .env                            # Optional environment config
 ├── .htaccess                       # Apache config (URL rewriting, etc.)
 ├── index.php                       # Main entry point
+│
 ├── App/
 │   ├── functions.php               # Core logic for navigation and parsing
 │   ├── Css/
@@ -50,14 +51,15 @@ SOMADoc/
 │   │   └── script.js               # Client-side logic and interactions
 │   └── Templates/
 │       └── Doc.html                # Main HTML template
-├── Doc/                            # This is where your markdown docs go
-│   ├─ VERSION/
-│   │   ├─ 00 - CATERGORY 1/        # All Category and Files need to start with "XX - "
-│   │   │   └─ 00 - PAGE 1.md
-│   │   ├─ 01 - CATERGORY 2/
-│   │   │   └─ 00 - PAGE 2.md
-│   │   └─ ...
-│   └─ ...
+│
+└── Doc/                            # This is where your markdown docs go
+    ├─ VERSION/
+    │   ├── 00 - CATERGORY 1/        # All Category and Files need to start with "XX - "
+    │   │   └── 00 - PAGE 1.md
+    │   ├── 01 - CATERGORY 2/
+    │   │   └── 00 - PAGE 2.md
+    │   └── ...
+    └─ ...
 ```
 
 ___
