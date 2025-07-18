@@ -39,32 +39,25 @@ ___
 
 ```
 SOMADoc/
-├── .env                   # Optional environment config
-├── .htaccess              # Apache config (URL rewriting, etc.)
-├── index.php              # Main entry point
+├── .env                            # Optional environment config
+├── .htaccess                       # Apache config (URL rewriting, etc.)
+├── index.php                       # Main entry point
 ├── App/
-│   ├── functions.php      # Core logic for navigation and parsing
+│   ├── functions.php               # Core logic for navigation and parsing
 │   ├── Css/
-│   │   └── style.scss     # Modify `$main-color` here to change theme
+│   │   └── style.scss              # Modify `$main-color` here to change theme
 │   ├── Js/
-│   │   └── script.js      # Client-side logic and interactions
+│   │   └── script.js               # Client-side logic and interactions
 │   └── Templates/
-│       └── Doc.html       # Main HTML template
-```
-
----
-
-## 📁 Doc Folder and Files Structure
-
-```
-Doc/
-├─ VERSION/
-│ ├─ 00 - CATERGORY 1/
-│ │ └─ 00 - PAGE 1.md
-│ ├─ 01 - CATERGORY 2/
-│ │ └─ 00 - PAGE 2.md
-│ └─ ...
-└─ ...
+│       └── Doc.html                # Main HTML template
+├── Doc/                            # This is where your markdown docs go
+│   ├─ VERSION/
+│   │   ├─ 00 - CATERGORY 1/        # All Category and Files need to start with "XX - "
+│   │   │   └─ 00 - PAGE 1.md
+│   │   ├─ 01 - CATERGORY 2/
+│   │   │   └─ 00 - PAGE 2.md
+│   │   └─ ...
+│   └─ ...
 ```
 
 ___
