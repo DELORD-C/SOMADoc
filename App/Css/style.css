@@ -522,11 +522,14 @@ a:hover {
   font-size: 1.05rem;
 }
 .doc md blockquote {
-  margin-inline: 0px;
+  margin-inline: 0;
   padding-block: 12px;
   padding-left: 16px;
   border-left: 2px solid var(--primary);
   font-style: italic;
+}
+.doc md img {
+  width: 100%;
 }
 .doc .page-nav {
   position: relative;
@@ -585,7 +588,7 @@ a:hover {
   background: var(--main);
   border-radius: 3px;
   z-index: 1;
-  transform-origin: 4px 0px;
+  transform-origin: 4px 0;
   transition: 0.3s;
 }
 #navToggle span ~ span:nth-last-child(1) {

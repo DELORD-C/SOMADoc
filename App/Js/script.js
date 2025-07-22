@@ -92,12 +92,16 @@ function updatePageNav () {
         for (let link of elems) {
             link.classList.remove('active');
         }
-        elems[0].classList.add('active');
+        if (elems[0]) {
+            elems[0].classList.add('active');
+        }
     } else if (top === doc.offsetHeight - window.innerHeight) {
         for (let link of elems) {
             link.classList.remove('active');
         }
-        elems[elems.length - 1].classList.add('active');
+        if (elems[elems.length - 1]) {
+            elems[elems.length - 1].classList.add('active');
+        }
     } else {
         let activated = false;
         for (let heading of document.querySelectorAll('md h2, md h3')) {
