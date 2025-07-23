@@ -1,34 +1,34 @@
 body {
   --space: 15px;
-  --bg: rgb(21.165, 29.835, 29.121);
-  --bg-2: rgb(14.8155, 20.8845, 20.3847);
+  --bg: rgb(29.835, 25.143, 21.165);
+  --bg-2: rgb(20.8845, 17.6001, 14.8155);
   --bg-3: black;
-  --bg-4: rgb(31.7475, 44.7525, 43.6815);
-  --bg-5: rgb(42.33, 59.67, 58.242);
-  --bg-6: rgb(63.495, 89.505, 87.363);
-  --bg-7: rgb(84.66, 119.34, 116.484);
-  --main: rgb(209.559, 216.291, 215.7366);
-  --border: rgba(223.329, 228.021, 227.6346, 0.05);
+  --bg-4: rgb(44.7525, 37.7145, 31.7475);
+  --bg-5: rgb(59.67, 50.286, 42.33);
+  --bg-6: rgb(89.505, 75.429, 63.495);
+  --bg-7: rgb(119.34, 100.572, 84.66);
+  --main: rgb(216.291, 212.6478, 209.559);
+  --border: rgba(228.021, 225.4818, 223.329, 0.05);
   --brightness: 1.2;
-  --primary: rgb(0, 255, 234);
+  --primary: #ff7500;
   --code: rgba(255, 255, 255, 0.06);
 }
 
 body[theme=bright] {
-  --bg: rgb(223.329, 228.021, 227.6346);
-  --bg-2: rgb(231.591, 235.059, 234.7734);
-  --bg-3: rgb(250.869, 251.481, 251.4306);
-  --bg-4: rgb(209.559, 216.291, 215.7366);
-  --bg-5: rgb(195.789, 204.561, 203.8386);
-  --bg-6: rgb(168.249, 181.101, 180.0426);
-  --bg-7: rgb(140.709, 157.641, 156.2466);
-  --main: rgb(21.165, 29.835, 29.121);
-  --border: rgba(21.165, 29.835, 29.121, 0.05);
-  --primary: rgb(0, 178.5, 163.8);
+  --bg: rgb(228.021, 225.4818, 223.329);
+  --bg-2: rgb(235.059, 233.1822, 231.591);
+  --bg-3: rgb(251.481, 251.1498, 250.869);
+  --bg-4: rgb(216.291, 212.6478, 209.559);
+  --bg-5: rgb(204.561, 199.8138, 195.789);
+  --bg-6: rgb(181.101, 174.1458, 168.249);
+  --bg-7: rgb(157.641, 148.4778, 140.709);
+  --main: rgb(29.835, 25.143, 21.165);
+  --border: rgba(29.835, 25.143, 21.165, 0.05);
+  --primary: rgb(178.5, 81.9, 0);
   --brightness: 1.1;
   --code: rgba(0, 0, 0, 0.06);
 }
-body[theme=bright] #loading > img {
+body[theme=bright] #loading > span {
   filter: brightness(85%);
 }
 
@@ -666,7 +666,24 @@ a:hover {
   z-index: 99999;
   user-select: none;
 }
+#loading > span {
+  color: var(--primary);
+  font-size: 5em;
+  font-family: fantasy;
+  text-shadow: 5px 5px 1px var(--bg-2);
+  animation: breath 1s infinite ease alternate;
+}
 
+@keyframes breath {
+  0% {
+    text-shadow: 5px 5px 1px var(--bg-2);
+    transform: scale(1);
+  }
+  100% {
+    text-shadow: 20px 20px 1px var(--bg-2);
+    transform: scale(1.5);
+  }
+}
 @media (max-width: 1050px) {
   .doc .content {
     display: flex;

@@ -34,7 +34,7 @@ body[theme="bright"] {
     --brightness: 1.1;
     --code: rgba(0, 0, 0, 0.06);
 
-    #loading > img {
+    #loading > span {
         filter: brightness(85%);
     }
 }
@@ -733,6 +733,26 @@ a {
 #loading {
     z-index: 99999;
     user-select: none;
+
+    > span {
+        color: var(--primary);
+        font-size: 5em;
+        font-family: fantasy;
+        text-shadow: 5px 5px 1px var(--bg-2);
+        animation: breath 1s infinite ease alternate;
+    }
+}
+
+@keyframes breath {
+    0% {
+        text-shadow: 5px 5px 1px var(--bg-2);
+        transform: scale(1);
+    }
+
+    100% {
+        text-shadow: 20px 20px 1px var(--bg-2);
+        transform: scale(1.5);
+    }
 }
 
 @media (max-width: 1050px) {
