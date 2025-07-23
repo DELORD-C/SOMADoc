@@ -188,7 +188,7 @@ function generateDataForSearch(array $doc, false|string $version): string
 function getLoading(): string
 {
     return '<div id="loading" class="fixed full flex justify-center align-center bg-1">
-        <img src="/Assets/loading.gif" alt="Loading">
+        <span>'.substr(env('APP_NAME') ?? 'SOMADoc', 0, 1).'</span>
     </div>';
 }
 
